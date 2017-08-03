@@ -1,5 +1,6 @@
 package com.andreea.Controller;
 
+import com.andreea.Service.CooperativeService;
 import com.andreea.Service.LandService;
 import com.andreea.Service.PeasantService;
 import org.slf4j.Logger;
@@ -19,12 +20,28 @@ public class PeasantController {
     private PeasantService peasantService;
     @Autowired
     private LandService landService;
+    @Autowired
+    private CooperativeService cooperativeService;
 
     private static Logger logger = LoggerFactory.getLogger(PeasantController.class);
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addPeasant(@RequestBody PeasantDTO peasantDTO){
-        peasantService.addPeasant(peasantDTO);
+    @RequestMapping(value = "/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addPeasant(@PathVariable("id") int id, @RequestBody PeasantDTO peasantDTO){
+        peasantService.addPeasant(id, peasantDTO);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public CooperativeDTO getCooperative(@PathVariable("id") int id){
+        long startTime = System.currentTimeMillis();
+
+        try {
+            return cooperativeService.getCooperative(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            logger.info("GET /cooperative/id - getCooperative "+ (System.currentTimeMillis() - startTime) + " millis spent");
+        }
+        return null;
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

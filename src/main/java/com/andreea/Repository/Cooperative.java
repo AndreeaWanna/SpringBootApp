@@ -1,8 +1,13 @@
 package com.andreea.Repository;
 
+import com.andreea.Controller.CooperativeDTO;
+import com.andreea.Controller.LandDTO;
+import com.andreea.Controller.PeasantDTO;
+
 import javax.persistence.*;
 import javax.sound.sampled.TargetDataLine;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,9 +16,9 @@ import java.util.List;
 @Entity
 @Table(name = "cooperative")
 public class Cooperative implements Serializable {
-    @Id
+
     @Column(name = "id_cooperative")
-    @GeneratedValue(strategy= GenerationType.AUTO)
+
     private int id;
     @Column
     private String name;
@@ -22,11 +27,12 @@ public class Cooperative implements Serializable {
     @JoinColumn(name = "id_cooperative")
     private List<Peasant> peasants;
 
-    public Cooperative() {
+    public Cooperative(String name) {
 
     }
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getId() {
         return id;
     }
@@ -41,5 +47,31 @@ public class Cooperative implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Peasant> getPeasants() {
+        return peasants;
+    }
+
+    public void setPeasants(List<Peasant> peasants) {
+        this.peasants = peasants;
+    }
+
+
+     public CooperativeDTO entityToDto() {
+       CooperativeDTO cooperativeDTO = new CooperativeDTO(this.id, this.name);
+       List<PeasantDTO> peasantDTO = null;
+       if ((this.getPeasants()!=null)) {
+           peasantDTO = new ArrayList<PeasantDTO>();
+           for (Peasant peasant: this.getPeasants()){
+               peasantDTO.add(peasant.entityToDto());
+           }
+       }
+       cooperativeDTO.setPeasants(peasantDTO);
+       return cooperativeDTO;
+   }
+
+    public void addPeasant (Peasant peasant) {
+        this.peasants.add(peasant);
     }
 }

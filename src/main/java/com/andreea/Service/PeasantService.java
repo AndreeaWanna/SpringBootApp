@@ -1,9 +1,8 @@
 package com.andreea.Service;
 
+import com.andreea.Controller.LandDTO;
 import com.andreea.Controller.PeasantDTO;
-import com.andreea.Repository.LandRepository;
-import com.andreea.Repository.Peasant;
-import com.andreea.Repository.PeasantRepository;
+import com.andreea.Repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +16,8 @@ public class PeasantService {
     PeasantRepository peasantRepository;
     @Autowired
     LandRepository landRepository;
+    @Autowired
+    CooperativeRepository cooperativeRepository;
 
     public static Peasant peasant;
 
@@ -33,8 +34,15 @@ public class PeasantService {
 
     }
 
-    public void addPeasant(PeasantDTO peasantDTO) {
+
+    public void addPeasant(int id, PeasantDTO peasantDTO) {
+        Cooperative cooperative = cooperativeRepository.findOne(id);
         Peasant peasant = peasantDTO.dtoToEntity();
-        peasantRepository.save(peasant);
+        cooperative.addPeasant(peasantDTO.dtoToEntity());
+        cooperativeRepository.save(cooperative);
+
+
+        //peasantRepository.save(peasant);
     }
+
 }

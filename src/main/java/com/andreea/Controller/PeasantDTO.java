@@ -100,5 +100,7 @@ public class PeasantDTO implements Serializable {
        peasant.setLands(lands);
        return peasant;
     }
+
+
 }
 
