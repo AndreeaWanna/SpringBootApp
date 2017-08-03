@@ -19,7 +19,7 @@ public class PeasantService {
     @Autowired
     CooperativeRepository cooperativeRepository;
 
-    public static Peasant peasant;
+
 
     public PeasantDTO getPeasant(int id){
       PeasantDTO peasantDTO = peasantRepository.findOne(id).entityToDto();
@@ -37,12 +37,10 @@ public class PeasantService {
 
     public void addPeasant(int id, PeasantDTO peasantDTO) {
         Cooperative cooperative = cooperativeRepository.findOne(id);
-        Peasant peasant = peasantDTO.dtoToEntity();
+
         cooperative.addPeasant(peasantDTO.dtoToEntity());
         cooperativeRepository.save(cooperative);
 
-
-        //peasantRepository.save(peasant);
     }
 
 }

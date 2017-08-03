@@ -18,7 +18,8 @@ import java.util.List;
 public class Cooperative implements Serializable {
 
     @Column(name = "id_cooperative")
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column
     private String name;
@@ -28,11 +29,10 @@ public class Cooperative implements Serializable {
     private List<Peasant> peasants;
 
     public Cooperative(String name) {
-
+          this.name= name;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+
     public int getId() {
         return id;
     }
@@ -59,7 +59,7 @@ public class Cooperative implements Serializable {
 
 
      public CooperativeDTO entityToDto() {
-       CooperativeDTO cooperativeDTO = new CooperativeDTO(this.id, this.name);
+       CooperativeDTO cooperativeDTO = new CooperativeDTO(this.name);
        List<PeasantDTO> peasantDTO = null;
        if ((this.getPeasants()!=null)) {
            peasantDTO = new ArrayList<PeasantDTO>();

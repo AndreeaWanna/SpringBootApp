@@ -18,11 +18,24 @@ public class CooperativeController {
     @Autowired
     private CooperativeService cooperativeService;
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addcooperative(@PathVariable("id") int id, @RequestBody CooperativeDTO cooperativeDTO){
-        cooperativeService.addCooperative(id, cooperativeDTO);
+    @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addcooperative(@RequestBody CooperativeDTO cooperativeDTO){
+        cooperativeService.addCooperative(cooperativeDTO);
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public CooperativeDTO getCooperative(@PathVariable("id") int id){
+        long startTime = System.currentTimeMillis();
+
+        try {
+            return cooperativeService.getCooperative(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            //logger.info("GET /cooperative/id - getCooperative "+ (System.currentTimeMillis() - startTime) + " millis spent");
+        }
+        return null;
+    }
 
 
 }

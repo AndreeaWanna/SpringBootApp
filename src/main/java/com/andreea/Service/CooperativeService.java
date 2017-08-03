@@ -18,17 +18,15 @@ public class CooperativeService {
     @Autowired
     CooperativeRepository cooperativeRepository;
 
-    public static Cooperative cooperative;
-
 
     public CooperativeDTO getCooperative(int id){
         CooperativeDTO cooperativeDTO = cooperativeRepository.findOne(id).entityToDto();
         return cooperativeDTO;
     }
 
-    public void addCooperative(int id, CooperativeDTO cooperativeDTO) {
-        Cooperative cooperative = cooperativeDTO.dtoToEntity();
-        cooperativeRepository.save(cooperative);
+    public void addCooperative(CooperativeDTO cooperativeDTO) {
+
+        cooperativeRepository.save(cooperativeDTO.dtoToEntity());
     }
 
 

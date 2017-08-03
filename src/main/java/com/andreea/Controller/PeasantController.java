@@ -30,19 +30,7 @@ public class PeasantController {
         peasantService.addPeasant(id, peasantDTO);
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public CooperativeDTO getCooperative(@PathVariable("id") int id){
-        long startTime = System.currentTimeMillis();
 
-        try {
-            return cooperativeService.getCooperative(id);
-        }catch (Exception e){
-            e.printStackTrace();
-        }finally {
-            logger.info("GET /cooperative/id - getCooperative "+ (System.currentTimeMillis() - startTime) + " millis spent");
-        }
-        return null;
-    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public PeasantDTO getPeasant(@PathVariable("id") int id){

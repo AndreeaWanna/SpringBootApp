@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Oana Bucurica on 8/2/2017.
  */
 public class CooperativeDTO implements Serializable {
-    private int id;
+
     private String name;
     private List<PeasantDTO> peasants = new ArrayList<>();
 
@@ -20,18 +20,10 @@ public class CooperativeDTO implements Serializable {
 
     }
 
-    public CooperativeDTO(int id, String name) {
-        this.id=id;
-        this.name = name;
+    public CooperativeDTO(String name) {
+              this.name = name;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
