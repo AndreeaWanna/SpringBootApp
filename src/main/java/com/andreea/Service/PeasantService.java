@@ -1,8 +1,10 @@
 package com.andreea.Service;
 
-import com.andreea.Controller.LandDTO;
 import com.andreea.Controller.PeasantDTO;
-import com.andreea.Repository.*;
+import com.andreea.Repository.Cooperative;
+import com.andreea.Repository.CooperativeRepository;
+import com.andreea.Repository.LandRepository;
+import com.andreea.Repository.PeasantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +16,10 @@ public class PeasantService {
 
     @Autowired
     PeasantRepository peasantRepository;
+
     @Autowired
     LandRepository landRepository;
+
     @Autowired
     CooperativeRepository cooperativeRepository;
 

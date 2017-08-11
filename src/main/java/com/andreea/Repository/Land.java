@@ -1,11 +1,9 @@
 package com.andreea.Repository;
 
 import com.andreea.Controller.LandDTO;
-import com.andreea.Controller.PeasantDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Created by Oana Bucurica on 7/26/2017.
@@ -58,6 +56,10 @@ public class Land implements Serializable{
     public LandDTO entityToDto(){
         LandDTO landDTO =  new LandDTO(this.id, this.width, this.length);
         return landDTO;
+    }
+
+    public int perimeter (int width, int length){
+        return width*length;
     }
 
 

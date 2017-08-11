@@ -1,6 +1,5 @@
 package com.andreea.Controller;
 
-import com.andreea.Service.CooperativeService;
 import com.andreea.Service.LandService;
 import com.andreea.Service.PeasantService;
 import org.slf4j.Logger;
@@ -20,8 +19,6 @@ public class PeasantController {
     private PeasantService peasantService;
     @Autowired
     private LandService landService;
-    @Autowired
-    private CooperativeService cooperativeService;
 
     private static Logger logger = LoggerFactory.getLogger(PeasantController.class);
 
@@ -29,7 +26,6 @@ public class PeasantController {
     public void addPeasant(@PathVariable("id") int id, @RequestBody PeasantDTO peasantDTO){
         peasantService.addPeasant(id, peasantDTO);
     }
-
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)

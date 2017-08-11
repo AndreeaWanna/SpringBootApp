@@ -109,4 +109,8 @@ public class Peasant implements Serializable{
     public void addLand(Land land) {
         this.lands.add(land);
     }
+
+    public String addString(String name, String dateOfBirth){
+        return name+dateOfBirth;
+    }
 }
